@@ -18,7 +18,24 @@ const Playlist = (props) => {
           flexDirection: { xs: "column", md: "row" },
         }}
       >
-        asd
+        <Avatar
+          src="/Justin-Bieber.jpg"
+          variant="square"
+          alt="Bieber"
+          sx={{
+            boxShadow: 15,
+            width: { sx: "100%", md: 235 },
+            height: { sx: "100%", md: 235 },
+          }}
+        />
+        <Box>
+          <Typography sx={{ fontSize: 12, fontWeight: "bold" }}>
+            Playlist
+          </Typography>
+          <Typography sx={{ fontSize: { xs: 42, md: 72 }, fontWeight: "bold" }}>
+            Code life
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );
