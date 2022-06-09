@@ -1,4 +1,4 @@
-import { Button, Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { accessUrl } from "../../config/config";
 
 const Login = () => {
@@ -15,11 +15,11 @@ const Login = () => {
     >
       <img
         src="/img/Spotify_Logo.png"
+        alt="Techover spotify"
         style={{ marginBottom: 300, width: "70%", maxWidth: 500 }}
-        alt="Logo"
       />
       <Button href={accessUrl} color="primary" variant="contained" size="large">
-        Login to spotify
+        Login to Spotify
       </Button>
     </Box>
   );

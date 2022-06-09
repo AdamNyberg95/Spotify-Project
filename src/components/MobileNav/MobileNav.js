@@ -1,65 +1,45 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import HomeIcon from "@mui/icons-material/Home";
-import SearchIcon from "@mui/icons-material/Search";
-import ListIcon from "@mui/icons-material/List";
+import React, { useState } from "react";
+import { Box, BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { Home, Search, List } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
 const MobileNav = () => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
   const navigate = useNavigate();
 
+  const styledNav = { color: "text.secondary" };
+
   return (
-    <Box
-      sx={{
-        display: { xs: "block", md: "none" },
-      }}
-    >
+    <Box sx={{ display: { xs: "block", md: "none" } }}>
       <BottomNavigation
+        sx={{ bgcolor: "background.paper" }}
         showLabels
         value={value}
-        sx={{ background: "background.paper" }}
         onChange={(event, newValue) => {
           setValue(newValue);
         }}
       >
         <BottomNavigationAction
-          sx={{
-            color: "text.secondary",
-          }}
-          value="home"
+          sx={styledNav}
           label="Home"
-          icon={<HomeIcon />}
-          onClick={() => {
-            navigate("/");
-          }}
+          icon={<Home />}
+          onClick={() => navigate("/")}
         />
         <BottomNavigationAction
-          sx={{
-            color: "text.secondary",
-          }}
-          value="seach"
-          label="Search"
-          icon={<SearchIcon />}
-          onClick={() => {
-            navigate("/search");
-          }}
+          sx={styledNav}
+          label="Sök"
+          icon={<Search />}
+          onClick={() => navigate("/search")}
         />
         <BottomNavigationAction
-          sx={{
-            color: "text.secondary",
-          }}
-          value="playlist"
-          label="Library"
-          icon={<ListIcon />}
-          onClick={() => {
-            navigate("/library");
-          }}
+          sx={styledNav}
+          label="Ditt bibliotek"
+          icon={<List />}
+          onClick={() => navigate("/library")}
         />
       </BottomNavigation>
     </Box>
   );
 };
+
 export default MobileNav;

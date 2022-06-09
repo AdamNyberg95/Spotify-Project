@@ -1,82 +1,44 @@
 import React from "react";
-import { Avatar, Box, Typography, Grid, Divider } from "@mui/material";
-import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
-import { formatTime } from "../../utils/functions";
-export default function SongTable({ songs }) {
+import { Box, Grid, Divider } from "@mui/material";
+import { AccessTimeRounded } from "@mui/icons-material";
+import SongRow from "../SongRow/SongRow";
+
+const SongTable = ({ songs, loading, spotifyApi }) => {
   const renderSongs = () => {
+    if (loading)
+      return [1, 2, 3, 4, 5, 6].map((e, i) => (
+        <SongRow loading={true} key={i} i={i} />
+      ));
+
     return songs.map((song, i) => {
+      const albumName = song.album.name;
+      const images = song.album.images;
+      console.log(images);
+      const title = song.name;
+      const artist = song.artists[0].name;
+      const duration = song.duration_ms / 1000;
+
       return (
-        <Grid
+        <SongRow
+          album={albumName}
+          images={images ? images : []}
+          title={title}
+          artist={artist}
+          duration={duration}
           key={i}
-          px={2}
-          py={1}
-          container
-          sx={{
-            width: "100%",
-            color: "text.secondary",
-            fontSize: 14,
-            borderRadius: 1,
-            cursor: "pointer",
-            "&:hover": { background: "#ffffff15" },
-          }}
-        >
-          <Grid
-            item
-            sx={{
-              width: 35,
-              display: "flex",
-              alignItems: "center",
-              fontSize: 16,
-            }}
-          >
-            {i + 1}
-          </Grid>
-          <Grid
-            item
-            sx={{
-              flex: 1,
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
-            }}
-          >
-            <Avatar src="/Justin-Bieber.png" alt="logo" variant="square" />
-            <Box>
-              <Typography sx={{ fontSize: 16, color: "white" }}>
-                {song.title}
-              </Typography>
-              <Typography sx={{ fontSize: 14 }}>{song.artist}</Typography>
-            </Box>
-          </Grid>
-          <Grid
-            item
-            xs={3}
-            sx={{
-              display: { xs: "none", md: "flex" },
-              alignItems: "center",
-            }}
-          >
-            {song.album}
-          </Grid>
-          <Grid
-            item
-            xs={3}
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-            }}
-          >
-            {formatTime(song.duration)}
-          </Grid>
-        </Grid>
+          i={i}
+          position={song.position}
+          contextUri={song.contextUri}
+          spotifyApi={spotifyApi}
+        />
       );
     });
   };
+
   return (
     <Box
       p={{ xs: 3, md: 4 }}
-      sx={{
+      xs={{
         flex: 1,
         overflowY: "auto",
         display: "flex",
@@ -84,23 +46,16 @@ export default function SongTable({ songs }) {
       }}
     >
       <Grid
+        container
         px={2}
         py={1}
-        container
         sx={{ width: "100%", color: "text.secondary", fontSize: 14 }}
       >
         <Grid item sx={{ width: 35, display: "flex", alignItems: "center" }}>
           #
         </Grid>
-        <Grid
-          item
-          sx={{
-            flex: 1,
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          TITLE
+        <Grid item sx={{ flex: 1, display: "flex", alignItems: "center" }}>
+          Title
         </Grid>
         <Grid
           item
@@ -110,26 +65,26 @@ export default function SongTable({ songs }) {
             alignItems: "center",
           }}
         >
-          ALBUM
+          Album
         </Grid>
         <Grid
           item
           xs={3}
           sx={{
             display: "flex",
-            justifyContent: "flex-end",
             alignItems: "center",
+            justifyContent: "flex-end",
           }}
         >
-          <AccessTimeRoundedIcon sx={{ width: 20, height: 20 }} />
+          <AccessTimeRounded sx={{ width: 20, height: 20 }} />
         </Grid>
       </Grid>
       <Box pb={2}>
-        <Divider
-          sx={{ backgroundColor: "#ffffff40", width: "100%", height: 1 }}
-        />
+        <Divider sx={{ width: "100%", height: 1 }} />
       </Box>
       {renderSongs()}
     </Box>
   );
-}
+};
+
+export default SongTable;

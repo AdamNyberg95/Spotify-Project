@@ -1,19 +1,20 @@
+import React from "react";
 import { Box, Button } from "@mui/material";
 
-const style = {
-  flex: 1,
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  flexDirection: "column",
-  gap: 5,
-};
-
-const Home = ({}) => {
+const Home = () => {
   return (
-    <Box sx={style}>
+    <Box
+      sx={{
+        flex: 1,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        gap: 5,
+      }}
+    >
       <img
-        src="./img/Techover.jpg"
+        src="/img/Spotify_Logo.png"
         style={{ maxHeight: "50%", maxWidth: "50%" }}
         alt="Techover"
       />
@@ -21,10 +22,10 @@ const Home = ({}) => {
         size="large"
         variant="contained"
         onClick={() =>
-          (window.location.href = "https://www.academy.techover.nu/")
+          (window.location.href = "https://www.academy.techover.nu")
         }
       >
-        Ansök nu
+        Ansök nu!
       </Button>
     </Box>
   );
